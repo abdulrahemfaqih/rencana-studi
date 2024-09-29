@@ -1,8 +1,7 @@
 <?php
 include_once($_SERVER["DOCUMENT_ROOT"] . "/praktikum-paw/pertemuan-6/config.php");
 include_once(BASEPATH .  "/database.php");
-
-$currentMenu = isset($_GET['menu']) ? $_GET['menu'] : basename($_SERVER["REQUEST_URI"]);
+include_once(BASEPATH . "/functions.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +14,7 @@ $currentMenu = isset($_GET['menu']) ? $_GET['menu'] : basename($_SERVER["REQUEST
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="<?= BASEURL ?>/assets/style.css">
-    <title>Rencana Studi</title>
+    <title>Rencana Studi | <?= $title ?></title>
 </head>
 
 <body>
@@ -29,22 +28,22 @@ $currentMenu = isset($_GET['menu']) ? $_GET['menu'] : basename($_SERVER["REQUEST
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link <?= ($currentMenu == 'home' || $currentMenu == basename($_SERVER["REQUEST_URI"])) ? 'text-light fw-bold' : '' ?>" href="index.php?menu=home">Home</a>
+                        <a class="nav-link <?= ($page === "home") ? 'text-light fw-bold' : '' ?>" href="<?= BASEURL ?>/index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($currentMenu == 'rencana_studi') ? 'text-light fw-bold' : '' ?>" href="rencana_studi/index.php?menu=rencana_studi">Rencana Studi</a>
+                        <a class="nav-link <?= ($page === 'rencana_studi') ? 'text-light fw-bold' : '' ?>" href="<?= BASEURL ?>/rencana_studi/index.php">Rencana Studi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($currentMenu == 'matakuliah') ? 'text-light fw-bold' : '' ?>" href="matakuliah/index.php?menu=matakuliah">Matakuliah</a>
+                        <a class="nav-link <?= ($page === 'matakuliah') ? 'text-light fw-bold' : '' ?>" href="<?= BASEURL ?>/matakuliah/index.php">Matakuliah</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($currentMenu == 'report') ? 'text-light fw-bold' : '' ?>" href="report.php?menu=report">Report</a>
+                        <a class="nav-link <?= ($page === 'report') ? 'text-light fw-bold' : '' ?>" href="<?= BASEURL ?>/report.php">Report</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="text-<?= ($currentMenu == 'profile') ? 'light fw-bold' : 'secondary'; ?>">None</span>
+                            <span class="text-<?= ($page === 'profile') ? 'light fw-bold' : 'secondary'; ?>">None</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
