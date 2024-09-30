@@ -103,3 +103,10 @@ function editDataMatakuliah($data) {
     ";
     return mysqli_query(DB, $query);
 }
+
+
+// ===================== END OF MATAKULIAH MODEL =====================
+
+/**
+ * Rencana Studi Model
+ */
