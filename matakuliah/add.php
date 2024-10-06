@@ -4,6 +4,7 @@ $page = "matakuliah";
 
 include_once("../layout/header.php");
 $matakuliahs = getNamaMatakuliahs();
+$semesters = getSemesters();
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -36,6 +37,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <option value="">Tidak Ada</option>
                 <?php foreach ($matakuliahs as $matkul) : ?>
                     <option value="<?= $matkul["id"] ?>"><?= $matkul["nama"] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="semester" class="form-label fw-bold">Semester</label>
+            <select class="form-select" name="semester_id" aria-label="Default select example">
+                <option disabled selected>Pilih Semester</option>
+                <?php foreach ($semesters as $semester) : ?>
+                    <option value="<?= $semester["id"] ?>"><?= $semester["nama"] ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

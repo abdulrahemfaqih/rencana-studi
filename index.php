@@ -6,6 +6,7 @@ include_once "layout/header.php";
 
 
 <div class="container my-4">
+    <h2>Rencana Studi</h2>
     <div class="row">
         <div class="col-lg-3 col-sm-6">
             <div class="card-box bg-blue">
@@ -20,17 +21,6 @@ include_once "layout/header.php";
             </div>
         </div>
 
-        <div class="col-lg-3 col-sm-6">
-            <div class="card-box bg-green">
-                <div class="inner">
-                    <h3>0</h3>
-                    <p>IPK</p>
-                </div>
-                <div class="icon">
-                    <i class="fa-solid fa-truck-droplet"></i>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

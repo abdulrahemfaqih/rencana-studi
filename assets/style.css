@@ -12,60 +12,48 @@
       display: none;
    }
 }
-
 .card-box {
    position: relative;
    color: #fff;
-   padding: 20px 10px 40px;
-   margin: 20px 0px;
+   padding: 10px 20px;
+   margin: 20px 0;
    border-radius: 5px;
+   display: flex;
+   justify-content: space-between; /* Membuat teks dan ikon berada pada sisi yang berlawanan */
+   align-items: center; /* Vertikal align ikon dan teks */
 }
 .card-box:hover {
    text-decoration: none;
    color: #f1f1f1;
 }
 .card-box:hover .icon i {
-   font-size: 100px;
-   transition: 1s;
-   -webkit-transition: 1s;
+   font-size: 80px;
+   transition: 0.5s;
+   /* -webkit-transition: 1s; */
 }
 .card-box .inner {
-   padding: 5px 10px 0 10px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: flex-start; /* Letakkan teks di sisi kiri */
 }
 .card-box h3 {
    font-size: 27px;
    font-weight: bold;
-   margin: 0 0 8px 0;
+   margin: 0;
    white-space: nowrap;
-   padding: 0;
    text-align: left;
 }
 .card-box p {
    font-size: 15px;
+   margin: 0;
 }
 .card-box .icon {
-   position: absolute;
-   top: auto;
-   bottom: 5px;
-   right: 5px;
-   z-index: 0;
    font-size: 72px;
    color: rgba(0, 0, 0, 0.15);
+   margin-left: auto; /* Dorong ikon ke kanan */
 }
-.card-box .card-box-footer {
-   position: absolute;
-   left: 0px;
-   bottom: 0px;
-   text-align: center;
-   padding: 3px 0;
-   color: rgba(255, 255, 255, 0.8);
-   background: rgba(0, 0, 0, 0.1);
-   width: 100%;
-   text-decoration: none;
-}
-.card-box:hover .card-box-footer {
-   background: rgba(0, 0, 0, 0.3);
-}
+
 .bg-blue {
    background-color: #00c0ef !important;
 }
@@ -79,3 +67,37 @@
    background-color: #d9534f !important;
 }
 
+/* Table */
+
+.table {
+   border-collapse: collapse;
+   border-radius: 5px;
+   overflow: hidden;
+}
+
+.table th,
+.table td {
+   border: none;
+   padding: 12px 15px;
+}
+
+.table thead tr {
+   background-color: #f8f9fa;
+   color: #333;
+   text-align: left;
+}
+
+.table tbody tr:nth-of-type(even) {
+   background-color: #f3f3f3;
+}
+
+.table tbody tr:last-of-type {
+   border-bottom: 2px solid #009879;
+}
+
+.btn-sm {
+   padding: 0.25rem 0.5rem;
+   font-size: 0.875rem;
+   line-height: 1.5;
+   border-radius: 0.2rem;
+}

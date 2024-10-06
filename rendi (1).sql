@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 30, 2024 at 05:27 AM
+-- Generation Time: Oct 06, 2024 at 08:48 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.8
 
@@ -61,6 +61,14 @@ CREATE TABLE `detail_rencana_studi` (
   `bobot_nilai_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `detail_rencana_studi`
+--
+
+INSERT INTO `detail_rencana_studi` (`id`, `matakuliah_id`, `rencana_studi_id`, `bobot_nilai_id`) VALUES
+(1, 7, 1, 1),
+(2, 8, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -74,30 +82,39 @@ CREATE TABLE `matakuliah` (
   `deskripsi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `prasyarat_id` int DEFAULT NULL,
   `tahun_ajaran` enum('ganjil','genap') NOT NULL,
-  `jenis` enum('wajib','pilihan') DEFAULT NULL
+  `jenis` enum('wajib','pilihan') DEFAULT NULL,
+  `semester_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `matakuliah`
 --
 
-INSERT INTO `matakuliah` (`id`, `nama`, `sks`, `deskripsi`, `prasyarat_id`, `tahun_ajaran`, `jenis`) VALUES
-(1, 'Algotma dan Dasar Pemrograman', 4, 'wajib', NULL, 'genap', 'wajib'),
-(4, 'PTI', 3, '', NULL, 'ganjil', 'wajib');
+INSERT INTO `matakuliah` (`id`, `nama`, `sks`, `deskripsi`, `prasyarat_id`, `tahun_ajaran`, `jenis`, `semester_id`) VALUES
+(7, 'PTI', 3, '', NULL, 'ganjil', 'wajib', 1),
+(8, 'ALPRO', 4, '', NULL, 'ganjil', 'wajib', 1),
+(9, 'MATDIS', 3, '', NULL, 'genap', 'wajib', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rencana studi`
+-- Table structure for table `rencana_studi`
 --
 
-CREATE TABLE `rencana studi` (
+CREATE TABLE `rencana_studi` (
   `id` int NOT NULL,
   `semester_id` int DEFAULT NULL,
   `total_sks` int DEFAULT NULL,
   `target_ip` int DEFAULT NULL,
-  `deskripsi` int DEFAULT NULL
+  `deskripsi` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `rencana_studi`
+--
+
+INSERT INTO `rencana_studi` (`id`, `semester_id`, `total_sks`, `target_ip`, `deskripsi`) VALUES
+(1, 1, 7, 4, '');
 
 -- --------------------------------------------------------
 
@@ -143,12 +160,13 @@ ALTER TABLE `detail_rencana_studi`
 --
 ALTER TABLE `matakuliah`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `prasyarat_id` (`prasyarat_id`);
+  ADD KEY `prasyarat_id` (`prasyarat_id`),
+  ADD KEY `semester_fk` (`semester_id`);
 
 --
--- Indexes for table `rencana studi`
+-- Indexes for table `rencana_studi`
 --
-ALTER TABLE `rencana studi`
+ALTER TABLE `rencana_studi`
   ADD PRIMARY KEY (`id`),
   ADD KEY `semester_id` (`semester_id`);
 
@@ -172,19 +190,19 @@ ALTER TABLE `bobot_nilai`
 -- AUTO_INCREMENT for table `detail_rencana_studi`
 --
 ALTER TABLE `detail_rencana_studi`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `matakuliah`
 --
 ALTER TABLE `matakuliah`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `rencana studi`
+-- AUTO_INCREMENT for table `rencana_studi`
 --
-ALTER TABLE `rencana studi`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `rencana_studi`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `semester`
@@ -202,19 +220,20 @@ ALTER TABLE `semester`
 ALTER TABLE `detail_rencana_studi`
   ADD CONSTRAINT `detail_rencana_studi_ibfk_1` FOREIGN KEY (`bobot_nilai_id`) REFERENCES `bobot_nilai` (`id`),
   ADD CONSTRAINT `detail_rencana_studi_ibfk_2` FOREIGN KEY (`matakuliah_id`) REFERENCES `matakuliah` (`id`),
-  ADD CONSTRAINT `detail_rencana_studi_ibfk_3` FOREIGN KEY (`rencana_studi_id`) REFERENCES `rencana studi` (`id`);
+  ADD CONSTRAINT `detail_rencana_studi_ibfk_3` FOREIGN KEY (`rencana_studi_id`) REFERENCES `rencana_studi` (`id`);
 
 --
 -- Constraints for table `matakuliah`
 --
 ALTER TABLE `matakuliah`
-  ADD CONSTRAINT `matakuliah_ibfk_1` FOREIGN KEY (`prasyarat_id`) REFERENCES `matakuliah` (`id`);
+  ADD CONSTRAINT `matakuliah_ibfk_1` FOREIGN KEY (`prasyarat_id`) REFERENCES `matakuliah` (`id`),
+  ADD CONSTRAINT `semester_fk` FOREIGN KEY (`semester_id`) REFERENCES `semester` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints for table `rencana studi`
+-- Constraints for table `rencana_studi`
 --
-ALTER TABLE `rencana studi`
-  ADD CONSTRAINT `rencana studi_ibfk_1` FOREIGN KEY (`semester_id`) REFERENCES `semester` (`id`);
+ALTER TABLE `rencana_studi`
+  ADD CONSTRAINT `rencana_studi_ibfk_1` FOREIGN KEY (`semester_id`) REFERENCES `semester` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

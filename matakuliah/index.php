@@ -52,45 +52,7 @@ include_once "../layout/header.php"
     </div>
 </div>
 
-<style>
-    .table {
-        border-collapse: collapse;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    .table th,
-    .table td {
-        border: none;
-        padding: 12px 15px;
-    }
-
-    .table thead tr {
-        background-color: #f8f9fa;
-        color: #333;
-        text-align: left;
-    }
-
-    .table tbody tr:nth-of-type(even) {
-        background-color: #f3f3f3;
-    }
-
-    .table tbody tr:last-of-type {
-        border-bottom: 2px solid #009879;
-    }
-
-    .btn-sm {
-        padding: .25rem .5rem;
-        font-size: .875rem;
-        line-height: 1.5;
-        border-radius: .2rem;
-    }
-</style>
 
 <?php
 include_once "../layout/footer.php"
-?>
-<?php
-include_once "../layout/footer.php"
-
 ?>
