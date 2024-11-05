@@ -1,5 +1,13 @@
 <?php
-include_once($_SERVER["DOCUMENT_ROOT"] . "/praktikum-paw/pertemuan-6/config.php");
+session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+}
+if ($page == 'matakuliah' && $_SESSION['role'] != 'Admin') {
+    header("Location: ../index.php");
+}
+
+include_once($_SERVER["DOCUMENT_ROOT"] . "/rencana-studi/config.php");
 include_once(BASEPATH .  "/database.php");
 include_once(BASEPATH . "/functions.php");
 ?>
@@ -20,7 +28,7 @@ include_once(BASEPATH . "/functions.php");
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="pembungkus container py-2">
-            <a class="navbar-brand fw-bold text-secondary visible" href="index.php">Rencana Studi</a>
+            <a class="navbar-brand fw-bold text-secondary visible" href="<?= BASEURL ?>/index.php">Rencana Studi</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,9 +41,13 @@ include_once(BASEPATH . "/functions.php");
                     <li class="nav-item">
                         <a class="nav-link <?= ($page === 'rencana_studi') ? 'text-light fw-bold' : '' ?>" href="<?= BASEURL ?>/rencana_studi/index.php">Rencana Studi</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= ($page === 'matakuliah') ? 'text-light fw-bold' : '' ?>" href="<?= BASEURL ?>/matakuliah/index.php">Matakuliah</a>
-                    </li>
+
+                    <?php if ($_SESSION['role']  == 'Admin') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($page === 'matakuliah') ? 'text-light fw-bold' : '' ?>" href="<?= BASEURL ?>/matakuliah/index.php">Matakuliah</a>
+                        </li>
+                    <?php endif; ?>
+
                     <li class="nav-item">
                         <a class="nav-link <?= ($page === 'report') ? 'text-light fw-bold' : '' ?>" href="<?= BASEURL ?>/report.php">Report</a>
                     </li>
@@ -43,11 +55,11 @@ include_once(BASEPATH . "/functions.php");
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="text-<?= ($page === 'profile') ? 'light fw-bold' : 'secondary'; ?>">None</span>
+                            <span class="text-<?= ($page === 'profile') ? 'light fw-bold' : 'secondary'; ?>"><?= $_SESSION['user']['nama'] ?></span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item bg-danger" href="#" onclick="return confirm('apakah anda yakin ingin logout')">Logout</a></li>
+                            <li><a class="dropdown-item bg-danger" href="<?= BASEURL ?>/logout.php" onclick="return confirm('apakah anda yakin ingin logout')">Logout</a></li>
                         </ul>
                     </li>
                 </ul>

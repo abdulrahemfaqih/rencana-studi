@@ -3,14 +3,9 @@ $title = "Matakuliah";
 $page = "matakuliah";
 include_once "../layout/header.php";
 
-
 $matakuliahs = getAllDataMatakuliah();
-
-
 ?>
-<?php
-include_once "../layout/header.php"
-?>
+
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4 pt-5">
         <h3>Daftar Matakuliah</h3>
@@ -24,7 +19,6 @@ include_once "../layout/header.php"
                     <th>Nama Matakuliah</th>
                     <th>SKS</th>
                     <th>Semester</th>
-                    <th>Prasyarat</th>
                     <th>Jenis</th>
                     <th>Aksi</th>
                 </tr>
@@ -36,8 +30,7 @@ include_once "../layout/header.php"
                         <td><?= $matkul["nama_matakuliah"] ?></td>
                         <td><?= $matkul["sks"] ?></td>
                         <td><?= $matkul["tahun_ajaran"]  ?></td>
-                        <td><?= $matkul["nama_prasyarat"] ?? "-" ?></td>
-                        <td><?= $matkul["jenis"]?></td>
+                        <td><?= $matkul["jenis"] ?></td>
                         <td>
                             <div class="d-flex" style="gap: 5px;">
                                 <a href="edit.php?id=<?= $matkul['id'] ?>" class="btn btn-sm btn-warning">Edit</a>

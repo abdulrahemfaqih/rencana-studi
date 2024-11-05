@@ -2,6 +2,7 @@
 $title = "Home";
 $page = "home";
 include_once "layout/header.php";
+
 ?>
 
 

@@ -3,8 +3,8 @@ $title = "Rencana Studi";
 $page = "rencana_studi";
 include_once "../layout/header.php";
 
-$rencanaStudi = getDataRencanaStudi();
-
+$role = $_SESSION['role'];
+$rencanaStudi = $role == 'Admin' ? getDataRencanaStudi() : getRencanaStudiByUser($_SESSION['user']['id']);
 ?>
 
 <div class="container my-4">
@@ -26,16 +26,17 @@ $rencanaStudi = getDataRencanaStudi();
         <div class="row">
             <?php foreach ($rencanaStudi as $rencana) : ?>
                 <div class="col-lg-3 col-sm-6">
-                    <div class="card-box bg-blue">
-                        <div class="inner">
-                            <h3><?= $rencana["kode_semester"] ?></h3>
-                            <p>Total SKS <?= $rencana['total_sks'] ?> | <?= number_format($rencana['target_ip'], 1) ?></p>
+                    <a href="read.php?id=<?= $rencana['id'] ?>" class="text-decoration-none">
+                        <div class="card-box bg-blue">
+                            <div class="inner">
+                                <h3><?= $rencana["kode_semester"] ?></h3>
+                                <p>Total SKS <?= $rencana['total_sks'] ?> | <?= number_format($rencana['target_ip'], 2) ?></p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa-solid fa fa-book"></i>
+                            </div>
                         </div>
-                        <div class="icon">
-                            <i class="fa-solid fa fa-book"></i>
-                        </div>
-
-                    </div>
+                    </a>
                 </div>
             <?php endforeach ?>
 

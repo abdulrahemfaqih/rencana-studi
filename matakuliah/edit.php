@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
 <div class="container">
     <h2 class="py-4"><?= $title ?></h2>
     <form action="" method="POST">
-        <input type="hidden" name="id"  value="<?= $matakuliah['id'] ?> ">
+        <input type="hidden" name="id" value="<?= $matakuliah['id'] ?> ">
         <div class="mb-3">
             <label for="namaMatakuliah" class="form-label">Nama Matakuliah</label>
             <input type="text" class="form-control" id="namaMatakuliah" name="namaMatakuliah" value="<?= $matakuliah['nama_matakuliah'] ?>" required>
@@ -59,14 +59,14 @@ if (isset($_POST["submit"])) {
             <label for="semester" class="form-label fw-bold">Tahun Ajaran</label>
             <div class="d-flex" style="gap: 20px;">
                 <div>
-                    <input class="form-check-input" type="radio" value="ganjil" name="tahunAjaran" id="flexRadioDefault1" <?= $matakuliah['tahun_ajaran'] == 'ganjil' ? 'checked' : "" ?> >
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" value="ganjil" name="tahunAjaran" id="tahunAjaran1" <?= $matakuliah['tahun_ajaran'] == 'ganjil' ? 'checked' : "" ?>>
+                    <label class="form-check-label" for="tahunAjaran1">
                         Ganjil
                     </label>
                 </div>
                 <div>
-                    <input class="form-check-input" type="radio" value="genap" name="tahunAjaran" id="flexRadioDefault2" <?= $matakuliah['tahun_ajaran'] == 'genap' ? 'checked' : "" ?> >
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" value="genap" name="tahunAjaran" id="tahunAjaran2" <?= $matakuliah['tahun_ajaran'] == 'genap' ? 'checked' : "" ?>>
+                    <label class="form-check-label" for="tahunAjaran2">
                         Genap
                     </label>
                 </div>
@@ -76,14 +76,14 @@ if (isset($_POST["submit"])) {
             <label for="semester" class="form-label fw-bold">Jenis</label>
             <div class="d-flex" style="gap: 20px;">
                 <div>
-                    <input class="form-check-input" type="radio" value="wajib" name="jenis" id="flexRadioDefault1" <?= $matakuliah['jenis'] == "wajib" ? "checked" : "" ?>>
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" value="wajib" name="jenis" id="jenis1" <?= $matakuliah['jenis'] == "wajib" ? "checked" : "" ?>>
+                    <label class="form-check-label" for="jenis1">
                         Wajib
                     </label>
                 </div>
                 <div>
-                    <input class="form-check-input" type="radio" value="pilihan" name="jenis" id="flexRadioDefault2" <?= $matakuliah['jenis'] == "pilihan" ? "checked" : "" ?>>
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" value="pilihan" name="jenis" id="jenis2" <?= $matakuliah['jenis'] == "pilihan" ? "checked" : "" ?>>
+                    <label class="form-check-label" for="jenis2">
                         Pilihan
                     </label>
                 </div>

@@ -57,14 +57,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label for="semester" class="form-label fw-bold">Tahun Ajaran</label>
             <div class="d-flex" style="gap: 20px;">
                 <div>
-                    <input class="form-check-input" type="radio" value="ganjil" name="tahunAjaran" id="flexRadioDefault1" checked>
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" value="ganjil" name="tahunAjaran" id="tahunAjaran1" checked>
+                    <label class="form-check-label" for="tahunAjaran1">
                         Ganjil
                     </label>
                 </div>
                 <div>
-                    <input class="form-check-input" type="radio" value="genap" name="tahunAjaran" id="flexRadioDefault2">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" value="genap" name="tahunAjaran" id="tahunAjaran2">
+                    <label class="form-check-label" for="tahunAjaran2">
                         Genap
                     </label>
                 </div>
@@ -74,14 +74,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label for="semester" class="form-label fw-bold">Jenis</label>
             <div class="d-flex" style="gap: 20px;">
                 <div>
-                    <input class="form-check-input" type="radio" value="wajib" name="jenis" id="flexRadioDefault1" checked>
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" value="wajib" name="jenis" id="jenis1" checked>
+                    <label class="form-check-label" for="jenis1">
                         Wajib
                     </label>
                 </div>
                 <div>
-                    <input class="form-check-input" type="radio" value="pilihan" name="jenis" id="flexRadioDefault2">
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input class="form-check-input" type="radio" value="pilihan" name="jenis" id="jenis2">
+                    <label class="form-check-label" for="jenis2">
                         Pilihan
                     </label>
                 </div>
