@@ -1,14 +1,13 @@
 <?php
 $title = "Tambah Rencana Studi";
 $page = "rencana_studi";
-
 include_once("../layout/header.php");
+
 
 if (isset($_GET["semester"])) {
     $semester = $_GET["semester"];
     $matakuliahs = getDataMatakuliahBySemester($semester);
     $bobotNilais = getBobotNilai();
-
 }
 
 
@@ -18,6 +17,7 @@ if (isset($_POST["simpanRencanaStudi"])) {
         "deskripsi" => $_POST["deskripsi"],
         "matakuliah_id" => $_POST["matakuliah_id"],
         "bobot_nilai_id" => $_POST["bobot_nilai_id"],
+        "user_id" => $_POST["user_id"]
     ];
 
     if (insertDataRencanaStudi($data)) {
@@ -41,6 +41,9 @@ if (isset($_POST["simpanRencanaStudi"])) {
 
     <form action="" method="post" id="formKRS">
         <input type="hidden" name="semester" value="<?= $semester ?>">
+
+        <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id'] ?>">
+
         <div class="table-responsive">
             <table class="table table-hover table-bordered" id="krsTable">
                 <thead class="table-light">

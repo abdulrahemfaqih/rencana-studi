@@ -224,8 +224,104 @@ function getDataRencanaStudi()
     return mysqli_query(DB, $query)->fetch_all(MYSQLI_ASSOC);
 }
 
+function getRencanaStudiByUser($user_id)
+{
+    $query = "
+        SELECT
+            rencana_studi.id,
+            semester.nama as semester,
+            semester.kode_semester,
+            rencana_studi.total_sks,
+            rencana_studi.target_ip,
+            rencana_studi.deskripsi
+        FROM
+            rencana_studi
+        JOIN
+            semester ON rencana_studi.semester_id = semester.id
+        JOIN
+            user ON user.id = rencana_studi.user_id
+        WHERE
+            user.id = $user_id
+    ";
+    return mysqli_query(DB, $query)->fetch_all(MYSQLI_ASSOC);
+}
+
+function getRencanaStudiById($id)
+{
+    $query = "
+        SELECT
+            rencana_studi.id,
+            semester.nama as semester,
+            semester.kode_semester,
+            rencana_studi.total_sks,
+            rencana_studi.target_ip,
+            rencana_studi.deskripsi
+        FROM
+            rencana_studi
+        JOIN
+            semester ON rencana_studi.semester_id = semester.id
+        WHERE
+            rencana_studi.id = $id
+    ";
+    return mysqli_query(DB, $query)->fetch_assoc();
+}
+
+function getAllDetailRencanaStudi($id = '')
+{
+    $query = "
+        SELECT 
+            semester.nama semester,
+            matakuliah.nama matakuliah,
+            matakuliah.sks,
+            bobot_nilai.predikat,
+            bobot_nilai.bobot
+        FROM
+            detail_rencana_studi
+        JOIN 
+            bobot_nilai ON detail_rencana_studi.bobot_nilai_id = bobot_nilai.id
+        JOIN
+            matakuliah ON detail_rencana_studi.matakuliah_id = matakuliah.id
+        JOIN
+            rencana_studi ON detail_rencana_studi.rencana_studi_id = rencana_studi.id
+        JOIN
+            semester ON rencana_studi.semester_id = semester.id
+    ";
+
+    if ($id) {
+        $query .= " WHERE rencana_studi.user_id = $id";
+    }
+
+    return mysqli_query(DB, $query)->fetch_all(MYSQLI_ASSOC);
+}
+
+function getAllDetailRencanaStudiById($id)
+{
+    $query = "
+        SELECT 
+            semester.nama semester,
+            matakuliah.nama matakuliah,
+            matakuliah.sks,
+            bobot_nilai.predikat,
+            bobot_nilai.bobot
+        FROM
+            detail_rencana_studi
+        JOIN 
+            bobot_nilai ON detail_rencana_studi.bobot_nilai_id = bobot_nilai.id
+        JOIN
+            matakuliah ON detail_rencana_studi.matakuliah_id = matakuliah.id
+        JOIN
+            rencana_studi ON detail_rencana_studi.rencana_studi_id = rencana_studi.id
+        JOIN
+            semester ON rencana_studi.semester_id = semester.id
+        WHERE
+            detail_rencana_studi.rencana_studi_id = $id
+    ";
+    return mysqli_query(DB, $query)->fetch_all(MYSQLI_ASSOC);
+}
+
 function insertDataRencanaStudi($data)
 {
+    $user_id = $data["user_id"];
     $semester = $data["semester_id"];
     $deskripsi = htmlspecialchars($data["deskripsi"]);
     $matakuliahIds = $data["matakuliah_id"];
@@ -253,13 +349,12 @@ function insertDataRencanaStudi($data)
         $targetIPK = $totalBobot / $totalSKS;
     }
 
-
     $query = "
         INSERT INTO
             rencana_studi
-                (semester_id, total_sks, target_ip, deskripsi)
+                (semester_id, total_sks, target_ip, deskripsi, user_id)
         VALUES
-            ($semester, $totalSKS, $targetIPK, '$deskripsi')
+            ($semester, $totalSKS, $targetIPK, '$deskripsi', $user_id)
     ";
     if (!mysqli_query(DB, $query)) {
         return false;
